@@ -1,15 +1,25 @@
 # handle API routes and orchestrate workflow
-from flask import Flask, jsonify
+import os
+from flask import Flask
+from flask_cors import CORS
 
-app = Flask(__name__)
+from config import Config # load Config class from config.py
+from routes.health_routes import health_bp
 
-@app.route("/", methods=["GET"])
-def home():
-    return jsonify({"message": "Tenex log analyzer backend running"})
+# set up app settings
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config) # load Config attributes into Flask configuration system
 
-@app.route("/health", methods=["GET"])
-def health():
-    return jsonify({"status": "ok"})
+    CORS(app) # enable CORS for Flask server
+
+    os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True) #check that upload folder exists
+
+    app.register_blueprint(health_bp) #register health routes from blueprint
+
+    return app
+
+app = create_app()
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001) # port 5000 is automatically reserved for AirPlay on Mac!
+    app.run(debug=True, port=5001) # port 5000 is usually reserved for AirPlay on Mac!
