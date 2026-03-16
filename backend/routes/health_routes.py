@@ -1,0 +1,1 @@
+# Define a test endpoint to confirm the server is running
