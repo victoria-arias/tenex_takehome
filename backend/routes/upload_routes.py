@@ -38,11 +38,16 @@ def upload_file():
         analysis = analyze_logs(df)
         anomalies = detect_anomalies(df)
 
-        return jsonify({
+        response = {
             "filename": filename,
             "analysis": analysis,
             "anomalies": anomalies
-        }), 200
+        }
+
+        if df.empty:
+            response["message"] = "No valid log entries were found in the uploaded file."
+
+        return jsonify(response), 200
 
     except Exception as exc:
         return jsonify({
