@@ -6,6 +6,7 @@ from flask_cors import CORS
 from config import Config # load Config class from config.py
 from routes.health_routes import health_bp
 from routes.upload_routes import upload_bp
+from routes.auth_routes import auth_bp
 
 # set up app settings
 def create_app():
@@ -18,6 +19,7 @@ def create_app():
 
     app.register_blueprint(health_bp) #register health routes from blueprint
     app.register_blueprint(upload_bp) 
+    app.register_blueprint(auth_bp)
 
     return app
 

@@ -2,51 +2,98 @@
 def analyze_logs(df):
 
     if df.empty:
-        return {}
+        return {
+            "summary": {
+                "total_requests": 0,
+                "unique_ips": 0,
+                "error_count": 0
+            },
+            "top_ips": [],
+            "top_endpoints": [],
+            "timeline": [],
+            "request_rate_over_time": []
+        }
 
     summary = {
-        "total_requests": len(df),
-        "unique_ips": df["ip"].nunique(),
-        "error_count": (df["status_code"] >= 400).sum()
+        "total_requests": int(len(df)),
+        "unique_ips": int(df["ip"].nunique()),
+        "error_count": int((df["status_code"] >= 400).sum())
     }
 
-    top_ips = (
+    top_ips_df = (
         df["ip"]
         .value_counts()
         .head(5)
-        .reset_index()
-        .rename(columns={"index": "ip", "ip": "count"})
-        .to_dict(orient="records")
+        .rename_axis("ip")
+        .reset_index(name="count")
     )
 
-    top_endpoints = (
+    top_ips = [
+        {
+            "ip": row["ip"],
+            "count": int(row["count"])
+        }
+        for _, row in top_ips_df.iterrows()
+    ]
+
+    top_endpoints_df = (
         df["endpoint"]
         .value_counts()
         .head(5)
-        .reset_index()
-        .rename(columns={"index": "endpoint", "endpoint": "count"})
-        .to_dict(orient="records")
+        .rename_axis("endpoint")
+        .reset_index(name="count")
     )
 
-    timeline = (
+    top_endpoints = [
+        {
+            "endpoint": row["endpoint"],
+            "count": int(row["count"])
+        }
+        for _, row in top_endpoints_df.iterrows()
+    ]
+
+    timeline_df = (
         df.sort_values("timestamp")
         .head(50)
-        .assign(
-            event=lambda x: (
-                x["method"] + " " +
-                x["endpoint"] +
-                " from " +
-                x["ip"] +
-                " returned " +
-                x["status_code"].astype(str)
-            )
-        )[["timestamp", "event"]]
-        .to_dict(orient="records")
+        .copy()
     )
+
+    timeline_df["event"] = (
+        timeline_df["method"] + " " +
+        timeline_df["endpoint"] +
+        " from " +
+        timeline_df["ip"] +
+        " returned " +
+        timeline_df["status_code"].astype(int).astype(str)
+    )
+
+    timeline = [
+        {
+            "timestamp": row["timestamp"].isoformat(),
+            "event": row["event"]
+        }
+        for _, row in timeline_df.iterrows()
+    ]
+
+    rate_df = (
+        df.set_index("timestamp")
+        .resample("1min")
+        .size()
+        .reset_index(name="request_count")
+    )
+
+    request_rate_over_time = [
+        {
+            "timestamp": row["timestamp"].isoformat(),
+            "request_count": int(row["request_count"])
+        }
+        for _, row in rate_df.iterrows()
+    ]
 
     return {
         "summary": summary,
         "top_ips": top_ips,
         "top_endpoints": top_endpoints,
-        "timeline": timeline
+        "timeline": timeline,
+        "request_rate_over_time": request_rate_over_time
     }
