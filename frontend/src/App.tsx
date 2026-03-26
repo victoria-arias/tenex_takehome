@@ -1,21 +1,18 @@
-import { loginUser } from "./api/client";
+import { useState } from "react";
+import LoginPage from "./pages/LoginPage";
 
 export default function App() {
-  async function testLogin() {
-    try {
-      const result = await loginUser("admin", "Tenex2026");
-      console.log("Login success:", result);
-      alert("Login worked");
-    } catch (error) {
-      console.error(error);
-      alert("Login failed");
-    }
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  if (!isLoggedIn) {
+    return <LoginPage onLoginSuccess={() => setIsLoggedIn(true)} />;
   }
 
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
       <h1>Tenex Log Analyzer</h1>
-      <button onClick={testLogin}>Test Login API</button>
+      <p>Logged in successfully.</p>
+      <p>Next step: build the upload page.</p>
     </div>
   );
 }
