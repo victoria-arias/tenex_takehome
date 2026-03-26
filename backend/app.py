@@ -13,7 +13,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config) # load Config attributes into Flask configuration system
 
-    CORS(app, origins=["http://localhost:3000"]) # enable CORS for Flask server
+    CORS(app, origins=["http://localhost:5173"]) # enable CORS for Flask server
 
     os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True) #check that upload folder exists
 
