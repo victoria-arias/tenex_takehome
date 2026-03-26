@@ -20,6 +20,8 @@ export default function ResultsPage({ result, onBack }: ResultsPageProps) {
         <strong>File:</strong> {result.filename}
       </p>
 
+      <strong>Anomalies:</strong> {result.anomalies.length}
+
       {result.message && <p>{result.message}</p>}
 
       <SummaryCards summary={result.analysis.summary} />
