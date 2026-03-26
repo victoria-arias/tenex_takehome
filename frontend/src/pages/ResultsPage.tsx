@@ -1,7 +1,7 @@
 import SummaryCards from "../components/SummaryCards";
 import TopIPsTable from "../components/TopIPsTable";
 import TopEndpointsTable from "../components/TopEndpointsTable";
-import RequestRateTable from "../components/RequestRateTable";
+import RequestRateChart from "../components/RequestRateChart";
 import TimelineTable from "../components/TimelineTable";
 import AnomaliesTable from "../components/AnomaliesTable";
 import type { UploadResponse } from "../types/apiTypes";
@@ -25,7 +25,7 @@ export default function ResultsPage({ result, onBack }: ResultsPageProps) {
       <SummaryCards summary={result.analysis.summary} />
       <TopIPsTable topIPs={result.analysis.top_ips} />
       <TopEndpointsTable topEndpoints={result.analysis.top_endpoints} />
-      <RequestRateTable points={result.analysis.request_rate_over_time} />
+      <RequestRateChart points={result.analysis.request_rate_over_time} />
       <TimelineTable timeline={result.analysis.timeline} />
       <AnomaliesTable anomalies={result.anomalies} />
 
