@@ -1,6 +1,7 @@
 import { useState } from "react";
 import LoginPage from "./pages/LoginPage";
 import UploadPage from "./pages/UploadPage";
+import ResultsPage from "./pages/ResultsPage";
 import type { UploadResponse } from "./types/apiTypes";
 
 export default function App() {
@@ -15,17 +16,5 @@ export default function App() {
     return <UploadPage onUploadSuccess={setResult} />;
   }
 
-  return (
-    <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
-      <h1>Upload successful</h1>
-      <p>File: {result.filename}</p>
-      <p>Total requests: {result.analysis.summary.total_requests}</p>
-      <p>Anomalies detected: {result.anomalies.length}</p>
-      <p>Next step: build the full results page.</p>
-
-      <button onClick={() => setResult(null)} style={{ marginTop: "16px" }}>
-        Upload Another File
-      </button>
-    </div>
-  );
+  return <ResultsPage result={result} onBack={() => setResult(null)} />;
 }
