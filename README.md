@@ -76,6 +76,7 @@ Log File → Parser → DataFrame → Analyzer → Anomaly Detector → Frontend
 
 ## 📦 Project Structure
 
+```
 tenex_assignment/
 ├── backend/
 │   ├── routes/
@@ -93,7 +94,7 @@ tenex_assignment/
 │   └── package.json
 │
 └── README.md
-
+```
 
 ---
 
