@@ -23,11 +23,12 @@ export default function ResultsPage({ result, onBack }: ResultsPageProps) {
       {result.message && <p>{result.message}</p>}
 
       <SummaryCards summary={result.analysis.summary} />
+      <AnomaliesTable anomalies={result.anomalies} />
       <TopIPsTable topIPs={result.analysis.top_ips} />
       <TopEndpointsTable topEndpoints={result.analysis.top_endpoints} />
       <RequestRateChart points={result.analysis.request_rate_over_time} />
       <TimelineTable timeline={result.analysis.timeline} />
-      <AnomaliesTable anomalies={result.anomalies} />
+      
 
       <button onClick={onBack} style={{ marginTop: "24px" }}>
         Upload Another File
