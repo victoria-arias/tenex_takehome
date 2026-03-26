@@ -101,14 +101,16 @@ tenex_assignment/
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the repository
+```
 git clone <your-repo-url>
 cd tenex_assignment
-
+```
 
 ### 2. Start the backend
+```
 cd backend
 python app.py
-
+```
 
 Backend runs at: http://127.0.0.1:5001/
 
@@ -116,14 +118,15 @@ Backend runs at: http://127.0.0.1:5001/
 ### 3. Start the frontend
 
 Open a new terminal:
+```
 cd frontend
 npm install
 npm run dev
-
+```
 
 ### 4. Login
-Username: admin
-Password: Tenex2026
+- Username: admin
+- Password: Tenex2026
 
 
 ### 5. Upload a log file
