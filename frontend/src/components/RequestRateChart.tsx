@@ -8,23 +8,13 @@ import {
   YAxis,
 } from "recharts";
 import type { RequestRatePoint } from "../types/apiTypes";
+import { formatTimeOnly, formatTimestamp } from "../utils/format";
 
 interface RequestRateTableProps {
   points: RequestRatePoint[];
 }
 
-function formatXAxisLabel(timestamp: string): string {
-  const date = new Date(timestamp);
-  return date.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}
 
-function formatTooltipLabel(timestamp: string): string {
-  const date = new Date(timestamp);
-  return date.toLocaleString();
-}
 
 export default function RequestRateTable({ points }: RequestRateTableProps) {
   return (
@@ -40,12 +30,12 @@ export default function RequestRateTable({ points }: RequestRateTableProps) {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
                 dataKey="timestamp"
-                tickFormatter={formatXAxisLabel}
+                tickFormatter={(value) => formatTimeOnly(String(value))}
                 minTickGap={30}
               />
               <YAxis allowDecimals={false} />
               <Tooltip
-                labelFormatter={(label) => formatTooltipLabel(String(label))}
+                labelFormatter={(value) => formatTimestamp(String(value))}
                 formatter={(value) => [value, "Requests"]}
               />
               <Line

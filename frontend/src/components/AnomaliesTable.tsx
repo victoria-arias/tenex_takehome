@@ -1,4 +1,5 @@
 import type { Anomaly } from "../types/apiTypes";
+import { formatTimestamp } from "../utils/format";
 
 interface AnomaliesTableProps {
   anomalies: Anomaly[];
@@ -27,7 +28,7 @@ export default function AnomaliesTable({ anomalies }: AnomaliesTableProps) {
             <tbody>
               {anomalies.map((anomaly, index) => (
                 <tr key={`${anomaly.ip}-${index}`}>
-                  <td>{anomaly.timestamp ?? "N/A"}</td>
+                  <td>{formatTimestamp(anomaly.timestamp)}</td>
                   <td>{anomaly.ip}</td>
                   <td>{anomaly.reason}</td>
                   <td>{anomaly.confidence.toFixed(2)}</td>

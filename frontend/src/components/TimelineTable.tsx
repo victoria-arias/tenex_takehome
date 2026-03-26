@@ -1,4 +1,5 @@
 import type { TimelineEvent } from "../types/apiTypes";
+import { formatTimestamp } from "../utils/format";
 
 interface TimelineTableProps {
   timeline: TimelineEvent[];
@@ -18,7 +19,7 @@ export default function TimelineTable({ timeline }: TimelineTableProps) {
         <tbody>
           {timeline.map((item, index) => (
             <tr key={`${item.timestamp}-${index}`}>
-              <td style={{ padding: "8px", borderBottom: "1px solid #eee" }}>{item.timestamp}</td>
+              <td style={{ padding: "8px", borderBottom: "1px solid #eee" }}>{formatTimestamp(item.timestamp)}</td>
               <td style={{ padding: "8px", borderBottom: "1px solid #eee" }}>{item.event}</td>
             </tr>
           ))}
