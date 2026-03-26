@@ -6,16 +6,16 @@ The application focuses on transforming raw log data into clear, human-readable 
 
 🚀 Features
 Core Functionality
-🔐 Basic authentication (login system)
-📁 Upload .log or .txt files
-⚙️ Backend parsing into structured data (pandas DataFrame)
-📈 Request rate visualization over time (line chart)
-📋 Summary statistics:
+Basic authentication (login system)
+Upload .log or .txt files
+Backend parsing into structured data (pandas DataFrame)
+Request rate visualization over time (line chart)
+Summary statistics:
 Total requests
 Unique IPs
 Error count
-🌐 Top IPs and endpoints
-🕒 Timeline of events
+Top IPs and endpoints
+Timeline of events
 Anomaly Detection
 
 The application detects and highlights:
@@ -47,7 +47,7 @@ Emphasizes clarity and usability
 Frontend
 React (Vite)
 TypeScript
-Recharts (for visualization)
+Recharts
 Backend
 Python
 Flask
@@ -68,6 +68,8 @@ tenex_assignment/
 │   │   ├── types/
 │   │   └── utils/
 │   └── package.json
+│
+└── README.md
 ⚙️ Setup Instructions
 1. Clone the repository
 git clone <your-repo-url>
@@ -76,7 +78,7 @@ cd tenex_assignment
 cd backend
 python app.py
 
-The backend will run at:
+Backend runs at:
 
 http://127.0.0.1:5001
 3. Start the frontend
@@ -87,7 +89,7 @@ cd frontend
 npm install
 npm run dev
 
-The frontend will run at:
+Frontend runs at:
 
 http://localhost:5173
 4. Login
@@ -99,9 +101,6 @@ Password: tenex123
 5. Upload a log file
 Upload a .log or .txt file
 View results immediately on the dashboard
-
-Example log files are included in the repository.
-
 📊 Example Output
 
 The results page includes:
