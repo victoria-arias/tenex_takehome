@@ -102,8 +102,8 @@ tenex_assignment/
 
 ### 1. Clone the repository
 ```
-git clone <your-repo-url>
-cd tenex_assignment
+git clone https://github.com/victoria-arias/tenex_takehome.git
+cd tenex_takehome
 ```
 
 ### 2. Start the backend
